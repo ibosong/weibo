@@ -1,0 +1,45 @@
+﻿@model MyWeibo.ViewModels.MyPageViewModel
+
+@{
+    ViewBag.Title = "MyPage";
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+<script src="~/Scripts/My/copyMsgfunction.js"></script>
+<script src="~/Scripts/ZebraDialog/zebra_dialog.js"></script>
+<link href="~/Content/ZebraDialog/zebra_dialog.css" rel="stylesheet" />
+
+<h2>@Model.userName</h2>@Html.Action("FollowPartial",new { id =Model.userId  })
+<div>注册时间：@Model.createDate</div>
+<hr />
+
+
+
+@foreach (var item in Model.myMsgs)
+    {
+        <div>
+            @item.name 说:
+            
+            @item.content
+            @if (item.copyContent != null)
+            {
+                <br />
+                @Html.Raw("转发自：")
+                <br />
+                <div>
+                    @item.copyName @Html.Raw(":")
+                    @item.copyContent
+                </div>
+                <br />
+                
+            }
+            
+            
+            <br />
+            
+            <a href="javascript:void(0)" onclick="copyMsgfunction('@item.id')">转发</a>
+            
+            <hr />
+
+        </div>
+    }

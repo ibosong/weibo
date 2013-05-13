@@ -1,0 +1,11 @@
+﻿
+
+@if (ViewBag.userId != WebSecurity.CurrentUserId)
+{
+    <div id="attention">
+        @Html.ActionLink(ViewBag.attention as string, "HandleAttention", "Weibo", new { id = ViewBag.userId }, new { })
+    
+     <input id="userId" type="hidden" value="@ViewBag.userId" />
+     </div>
+
+}

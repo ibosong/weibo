@@ -1,0 +1,151 @@
+﻿@model MyWeibo.ViewModels.MyHome
+
+@{
+    ViewBag.Title = "Index";
+   
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Styles.Render("~/Content/themes/base/css")
+<script src="~/Scripts/ZebraDialog/zebra_dialog.js"></script>
+<link href="~/Content/ZebraDialog/zebra_dialog.css" rel="stylesheet" />
+<script>
+    $(function () {
+
+        
+        $("#postbtn").click(function () {
+            
+            var g = '00000000-0000-0000-0000-000000000000';
+            
+           //发送微博
+            $.get("/Weibo/PostMessage",
+                {
+                    "content": $("#posttxt").val(),
+                    "copyMsgId":g
+                }, function (data) {
+                    
+                    $.Zebra_Dialog(data.message, {
+                        'buttons': false,
+                        'modal': true,
+                        'width': 200,
+                        'type':false,
+                        'auto_close': 700
+                    });
+                }
+                
+                )
+        });
+
+        $("#copyMsgDialog").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 300,
+            width: 600,
+            buttons: {
+                "发送": function () {
+                    $.get("/Weibo/PostMessage",
+                         {
+                             "content": $(".copyMsg").val(),
+                             "copyMsgId": $("#copyMsgId").attr("value")
+                         },
+                function (data) {
+
+                    $.Zebra_Dialog(data.message, {
+                        'buttons': false,
+                        'modal': true,
+                        'width': 200,
+                        'type': false,
+                        'auto_close': 700
+                    });
+                }
+                );
+                    $(this).dialog("close");
+                }
+            }
+        });
+        
+       
+    });
+
+    
+    function copyMsgfunction(msgId) {
+
+
+        $.get("/Weibo/CopyMessagePartial", { msgId: msgId }, function (data) {
+
+            $("#copyMsgDialog").html(data);
+        });
+        $("#copyMsgDialog").dialog("open");
+    //    $.Zebra_Dialog($("#copyMsgDialog")[0].innerHTML, {
+    //        'modal': true,
+    //        'type': false,
+    //        'width': 600,
+    //        'buttons': ['发送', '取消']
+    //    });
+    //$.Zebra_Dialog('转发微博<br/>', {
+    //    'modal': true,
+    //    'type': false,
+    //    'width': 600,
+    //    'buttons': ['发送', '取消'],
+    //    'source': {
+    //        'ajax': {
+    //            'url': '/Weibo/CopyMessagePartial',
+    //            'data': { msgId: msgId },
+    //            'complete': function (data) {
+                        
+    //            }
+
+
+
+
+    //        }
+    //    }
+
+    //});
+
+    }
+
+
+    
+</script>
+<body>
+    
+    <div>
+    <input type="text" id="posttxt" />
+    </div>
+    <div>
+        <input type="button" id="postbtn" value="发送"/>
+    </div>
+    <div id="copyMsgDialog">
+            
+    </div>
+    @foreach (var item in Model.Timelines)
+    {
+        <div>
+            @Html.ActionLink(item.name, "MyPage", new { id = item.userId }) 说:
+            
+            @item.content
+            @if (item.copyContent != null)
+            {
+                <br />
+                @Html.Raw("转发自：")
+                <br />
+                <div>
+                    @item.copyName @Html.Raw(":")
+                    @item.copyContent
+                </div>
+                <br />
+                
+            }
+            
+            
+            <br />
+            
+            <a href="javascript:void(0)" onclick="copyMsgfunction('@item.id')">转发</a>
+            
+            <hr />
+          
+        </div>
+    }
+    
+</body>

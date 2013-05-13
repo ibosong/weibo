@@ -1,0 +1,20 @@
+﻿@model MyWeibo.ViewModels.CopyMsgViewModel
+
+<form>
+
+@if(Model.Msg==string.Empty)
+{
+    
+    <textarea class="copyMsg" rows ="3" wrap="hard"></textarea>
+}
+else {
+    
+    <textarea class="copyMsg" rows="3" wrap="soft">// @@@Model.name :  @Model.Msg</textarea>
+}
+    
+    
+<div>
+    @Model.userName: @Model.copyMsg
+</div>
+    <input type="hidden" id="copyMsgId" value="@Model.copyMsgId"/>
+</form>
