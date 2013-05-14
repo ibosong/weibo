@@ -52,6 +52,14 @@ namespace MyWeibo.BLL
             return model;
 
         }
+
+        public void RemoveMessage(Guid id)
+        {
+            Message model = db.Messages.Find(id);
+            db.Messages.Remove(model);
+            db.SaveChanges();
+
+        }
         public bool IsFollowing(int id1,int id2)//id1是否关注id2
         {
             List<int> f = (from m in db.Follows

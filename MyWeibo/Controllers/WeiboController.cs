@@ -36,7 +36,7 @@ namespace MyWeibo.Controllers
             else return View();
         }
 
-        
+        [Authorize]
         public ActionResult PostMessage(string content,Guid copyMsgId)
         {
             Message postMsg = new Message();
@@ -59,7 +59,21 @@ namespace MyWeibo.Controllers
         }
 
 
+        public ActionResult DelMessage(Guid msgId)
+        {
+            string state = "删除成功！";
+            try
+            {
+                mypageBLL.RemoveMessage(msgId);
+            }
+            catch
+            {
 
+                state = "出现错误！";
+            }
+
+            return Json(new { message = state }, JsonRequestBehavior.AllowGet);
+        }
         
         
         public ActionResult CopyMessagePartial(Guid msgId)
@@ -85,7 +99,6 @@ namespace MyWeibo.Controllers
             return PartialView(model);
         }
 
-
         public ActionResult MyPage(int id)
         {
             MyPageViewModel model = mypageBLL.GetMyPageInfo(id);
@@ -94,6 +107,7 @@ namespace MyWeibo.Controllers
             model.userId = id;
             return View(model);
         }
+        
         
         
         public ActionResult FollowPartial(int id)
