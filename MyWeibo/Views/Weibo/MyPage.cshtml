@@ -5,16 +5,49 @@
 }
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryui")
-<script src="~/Scripts/My/copyMsgfunction.js"></script>
+@Styles.Render("~/Content/themes/base/css")
+<script src="~/Scripts/copyMsgfunction.js"></script>
 <script src="~/Scripts/ZebraDialog/zebra_dialog.js"></script>
 <link href="~/Content/ZebraDialog/zebra_dialog.css" rel="stylesheet" />
+<script>
+    $(function () {
+        $("#copyMsgDialog").dialog({
+            autoOpen: false,
+            modal: true,
+            height: 300,
+            width: 600,
+            buttons: {
+                "发送": function () {
+                    $.get("/Weibo/PostMessage",
+                         {
+                             "content": $(".copyMsg").val(),
+                             "copyMsgId": $("#copyMsgId").attr("value")
+                         },
+                function (data) {
 
+                    $.Zebra_Dialog(data.message, {
+                        'buttons': false,
+                        'modal': true,
+                        'width': 200,
+                        'type': false,
+                        'auto_close': 700
+                    });
+                }
+                );
+                    $(this).dialog("close");
+                }
+            }
+        });
+    });
+</script>
 <h2>@Model.userName</h2>@Html.Action("FollowPartial",new { id =Model.userId  })
 <div>注册时间：@Model.createDate</div>
 <hr />
 
 
-
+<div id="copyMsgDialog">
+            
+    </div>
 @foreach (var item in Model.myMsgs)
     {
         <div>
