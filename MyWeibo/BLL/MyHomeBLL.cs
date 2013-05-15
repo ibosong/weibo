@@ -30,9 +30,9 @@ namespace MyWeibo.BLL
                  select h.UserId).ToList();
             //需包含自己发的微博
             FollowsId.Add(id);
-           
-            
-            
+
+
+
             var message =
                 (from o in db.Messages
                  join c in db.UserProfiles
@@ -43,9 +43,10 @@ namespace MyWeibo.BLL
                      id = o.MsgId,
                      content = o.MsgContent,
                      name = c.UserName,
-                     userId=o.UserId,
+                     userId = o.UserId,
                      datetime = o.MsgDateTime,
                      copyMsgId = o.CopyMsgId,
+                     copyMsgCount = o.CopyCount,
                      copyContent = (from y in db.Messages
                                     where y.MsgId.Equals(o.CopyMsgId)
                                     select y.MsgContent).FirstOrDefault(),

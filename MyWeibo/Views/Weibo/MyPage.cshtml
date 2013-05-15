@@ -7,6 +7,7 @@
 @Scripts.Render("~/bundles/jqueryui")
 @Styles.Render("~/Content/themes/base/css")
 <script src="~/Scripts/copyMsgfunction.js"></script>
+<script src="~/Scripts/delMesfunction.js"></script>
 <script src="~/Scripts/ZebraDialog/zebra_dialog.js"></script>
 <link href="~/Content/ZebraDialog/zebra_dialog.css" rel="stylesheet" />
 <script>
@@ -41,29 +42,7 @@
     });
 
 
-    function delMsgfunction(msgId) {
-        $.Zebra_Dialog("确定删除？", {
-            'modal': true,
-            'type': false,
-            'width': 300,
-            'buttons': ['确定', '取消'],
-            'onClose': function (caption) {
-                if (caption == '确定')
-                {
-                    $.get("/Weibo/DelMessage", { msgId: msgId }, function (data) {
-                        $.Zebra_Dialog(data.message, {
-                            'buttons': false,
-                            'modal': true,
-                            'width': 200,
-                            'type': false,
-                            'auto_close': 700
-                        });
-                    });
-                }
-            }
-
-        });
-    }
+    
 </script>
 <h2>@Model.userName</h2>@Html.Action("FollowPartial",new { id =Model.userId  })
 <div>注册时间：@Model.createDate</div>
@@ -95,8 +74,11 @@
             
             <br />
             
-            <a href="javascript:void(0)" onclick="copyMsgfunction('@item.id')">转发</a>
-            <a href="javascript:void(0)" onclick="delMsgfunction('@item.id')">删除</a>
+            <a href="javascript:void(0)" onclick="copyMsgfunction('@item.id')">转发(@item.copyMsgCount)</a>
+            @if (Model.userName == WebSecurity.CurrentUserName)
+            {
+                <a href="javascript:void(0)" onclick="delMsgfunction('@item.id')">删除</a> 
+            }
             <hr />
 
         </div>

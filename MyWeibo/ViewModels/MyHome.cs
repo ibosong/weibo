@@ -39,6 +39,7 @@ namespace MyWeibo.ViewModels
         public Guid copyMsgId { get; set; }//被转发微博ID
         public string copyName { get; set; }//被转发的用户名
         public string copyContent { get; set; }//转发内容
+        public int copyMsgCount { get; set; }//转发次数
     }
     
 }

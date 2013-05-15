@@ -12,7 +12,7 @@ namespace MyWeibo.ViewModels
         public string userName { get; set; }
         public DateTime createDate { get; set; }
         public int userId { get; set; }
-        public string attentionTxt { get; set; }
+        
 
     }
 }

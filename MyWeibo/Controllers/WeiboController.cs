@@ -40,7 +40,10 @@ namespace MyWeibo.Controllers
         public ActionResult PostMessage(string content,Guid copyMsgId)
         {
             Message postMsg = new Message();
-            
+            if (copyMsgId != Guid.Empty)//如果是转发微博，被转发微博的转发次数+1
+            {
+                myhomeBLL.GetMessage(copyMsgId).CopyCount++;
+            }
             postMsg.CopyMsgId = copyMsgId;
             postMsg.UserId = WebSecurity.GetUserId(User.Identity.Name);
             postMsg.MsgDateTime = DateTime.Now;
@@ -75,7 +78,11 @@ namespace MyWeibo.Controllers
             return Json(new { message = state }, JsonRequestBehavior.AllowGet);
         }
         
-        
+        /// <summary>
+        /// 转发微博时弹窗，用这个Partial View填充
+        /// </summary>
+        /// <param name="msgId">被转发微博的Id</param>
+        /// <returns></returns>
         public ActionResult CopyMessagePartial(Guid msgId)
         {
             CopyMsgViewModel model = new CopyMsgViewModel();

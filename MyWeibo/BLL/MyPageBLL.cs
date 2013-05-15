@@ -28,6 +28,7 @@ namespace MyWeibo.BLL
                      name = c.UserName,
                      datetime = o.MsgDateTime,
                      copyMsgId = o.CopyMsgId,
+                     copyMsgCount=o.CopyCount,
                      copyContent = (from y in db.Messages
                                     where y.MsgId.Equals(o.CopyMsgId)
                                     select y.MsgContent).FirstOrDefault(),

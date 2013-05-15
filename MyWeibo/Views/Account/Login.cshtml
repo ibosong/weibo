@@ -45,6 +45,8 @@
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
 
-@*@section Scripts {
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    
     @Scripts.Render("~/bundles/jqueryval")
-}*@
+}
