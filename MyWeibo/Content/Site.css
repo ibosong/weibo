@@ -6,6 +6,7 @@
 
 body {
     background-color: #fff;
+    background: url(../Images/bgpattern.jpg);
     border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
@@ -130,14 +131,18 @@ footer {
 ----------------------------------------------------------*/
 .site-title {
     color: #c8c8c8;
-    font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
+    /*font-family: Rockwell, Consolas, "Courier New", Courier, monospace;*/
+    font-family:  Algerian,'Angsana New',Rockwell;
     font-size: 2.3em;
     margin: 0;
 }
-
+    .site-title a span {
+        color:#fff;
+        font-family: Aharoni
+    }
 .site-title a, .site-title a:hover, .site-title a:active {
     background: none;
-    color: #c8c8c8;
+    color: #eef801;
     outline: none;
     text-decoration: none;
 }
@@ -195,7 +200,7 @@ ul#menu {
 
         ul#menu li a {
             background: none;
-            color: #999;
+            color: #fff;
             text-decoration: none;
         }
 
