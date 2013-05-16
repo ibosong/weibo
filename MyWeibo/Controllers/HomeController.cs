@@ -9,13 +9,14 @@ namespace MyWeibo.Controllers
 {
     public class HomeController : Controller
     {
-        HomeBLL homeBLL = new HomeBLL();   
+        //HomeBLL homeBLL = new HomeBLL();   
         public ActionResult Index()
         {
-            HomeViewModel model = new HomeViewModel();
-            model.users = homeBLL.GetHomeUserInfo(10);
+            //HomeViewModel model = new HomeViewModel();
+            //model.users = homeBLL.GetHomeUserInfo(10);
 
-            return View(model);
+            //return View(model);
+            return View();
         }
 
         public ActionResult About()

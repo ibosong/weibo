@@ -1,4 +1,4 @@
-﻿@model MyWeibo.ViewModels.HomeViewModel
+﻿@*@model MyWeibo.ViewModels.HomeViewModel*@
 @{
     ViewBag.Title = "Home Page";
 }
@@ -10,14 +10,14 @@
                 <h2>@ViewBag.Message</h2>
             </hgroup>
             
-                @foreach(var item in Model.users)
+                @*@foreach(var item in Model.users)
                 {
                     <li>
                         <div>@item.userName</div>
                         <div>活跃时间 @item.userTime</div>
                     </li>
                 }
-            
+            *@
         </div>
     </section>
 }
