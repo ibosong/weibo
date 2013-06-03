@@ -27,11 +27,21 @@
                         @Html.Partial("_LoginPartial")
                     </section>
                     <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        @if(WebSecurity.IsAuthenticated)
+                        {
+                        <ul id="menu">                            
+                            <li>@Html.ActionLink("主页", "Index", "Weibo")</li>
+                            <li>@Html.ActionLink("我的主页", "MyPage", "Weibo", new { id = WebSecurity.GetUserId(User.Identity.Name) }, new { })</li>
+                            
                         </ul>
+                        }
+                        else
+                        {
+                            <ul id="menu">                            
+                            <li>@Html.ActionLink("联系", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("关于", "About", "Home")</li>
+                        </ul>
+                        }
                     </nav>
                 </div>
             </div>

@@ -39,9 +39,7 @@ namespace MyWeibo.Controllers
             {
                 return RedirectToLocal(returnUrl);
             }
-
-            // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            ModelState.AddModelError("", "用户名或密码错误！");
             return View(model);
         }
 

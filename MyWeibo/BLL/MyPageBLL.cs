@@ -10,7 +10,15 @@ namespace MyWeibo.BLL
     public class MyPageBLL
     {
         private WeiboContext db = new WeiboContext();
-        public List<Timeline> GetMyTimeline(int id)
+        
+        public MyPageViewModel GetMyPageInfo(int userId)
+        {
+            MyPageViewModel model = new MyPageViewModel();
+            model.myMsgs = GetMyTimeline(userId);
+            return model;
+
+        }
+public List<Timeline> GetMyTimeline(int id)
         {
 
 
@@ -46,14 +54,6 @@ namespace MyWeibo.BLL
 
             return msg;
         }
-        public MyPageViewModel GetMyPageInfo(int userId)
-        {
-            MyPageViewModel model = new MyPageViewModel();
-            model.myMsgs = GetMyTimeline(userId);
-            return model;
-
-        }
-
         public void RemoveMessage(Guid id)
         {
             Message model = db.Messages.Find(id);

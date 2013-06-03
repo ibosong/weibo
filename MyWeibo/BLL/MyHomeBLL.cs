@@ -82,6 +82,10 @@ namespace MyWeibo.BLL
                           select m.User.UserName).FirstOrDefault();
             return name;
         }
+        /// <summary>
+        /// 发布微博
+        /// </summary>
+        /// <param name="msg"></param>
         public void PostMessage(Message msg)
         {
 

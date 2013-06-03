@@ -25,6 +25,7 @@ namespace MyWeibo.Models
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
+        [Required]
         public string UserName { get; set; }
         [Display(Name = "邮箱")]
         [DataType(DataType.EmailAddress,ErrorMessage="Email地址格式不正确")]

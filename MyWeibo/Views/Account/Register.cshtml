@@ -5,7 +5,7 @@
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
+    <h2>注册新帐户</h2>
 </hgroup>
 
 @using (Html.BeginForm()) {
@@ -13,22 +13,22 @@
     @Html.ValidationSummary()
 
     <fieldset>
-        <legend>Registration Form</legend>
+        <legend>注册</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.UserName)
+                <label>用户名</label>
                 @Html.TextBoxFor(m => m.UserName)
             </li>
             <li>
-                @Html.LabelFor(m => m.Password)
+                <label>密码</label>
                 @Html.PasswordFor(m => m.Password)
             </li>
             <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
+                <label>确认密码</label>
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
         </ol>
-        <input type="submit" value="Register" />
+        <input type="submit" value="注册" />
     </fieldset>
 }
 
